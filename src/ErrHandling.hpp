@@ -19,7 +19,7 @@
 		        std::cout << " in file " << __FILE__ << "\n";  \
 		    }
 #endif
-   
+
 #ifndef ___DBUG
 #define PRINT(x)
 #else
@@ -27,11 +27,14 @@
  	  std::cout << #x << ":\t" << x << std::endl;
 #endif
 
-class ERR
-{
+class ERR {
 public:
-	class SDL_Err{};
-	class Out_Of_Memory{};
+
+    class SDL_Err {
+    };
+
+    class Out_Of_Memory {
+    };
 };
 
 #endif

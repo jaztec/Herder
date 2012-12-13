@@ -7,7 +7,7 @@
  *
  * Jan-2010
  *
-*/
+ */
 
 #ifdef __WIN32
 #include "SDL.h"
@@ -32,77 +32,82 @@
 
 typedef signed short int Ssint;
 
-class Tile
-{
+class Tile {
 private:
-	SDL_Rect* inner;
-	Uint16 typeTile;
+    SDL_Rect* inner;
+    Uint16 typeTile;
 
 public:
-	Tile();
-	~Tile();
+    Tile();
+    ~Tile();
 
-	Uint16 get_type()const;
-	void set_type( Uint16 );
-	SDL_Rect& get_inner();
-	SDL_Rect* get_inner( int );
-	void set_inner( SDL_Rect* );
-	void show( SDL_Surface*, SDL_Surface*, Tile* );
+    Uint16 get_type()const;
+    void set_type(Uint16);
+    SDL_Rect& get_inner();
+    SDL_Rect* get_inner(int);
+    void set_inner(SDL_Rect*);
+    void show(SDL_Surface*, SDL_Surface*, Tile*);
 
 };
 
-class Camera
-{
+class Camera {
 private:
-	SDL_Rect itsView;
+    SDL_Rect itsView;
 
 protected:
 
 public:
-	Camera();
-	~Camera(){}
+    Camera();
 
-	void set_camera( Ssint xPos, Ssint yPos );
-	void set_dimensions( Uint16 camW, Uint16 camH );
+    ~Camera() {
+    }
 
-	SDL_Rect get_view() const { return itsView; }
+    void set_camera(Ssint xPos, Ssint yPos);
+    void set_dimensions(Uint16 camW, Uint16 camH);
+
+    SDL_Rect get_view() const {
+        return itsView;
+    }
 };
 
-class TileManager
-{
+class TileManager {
 private:
-	Tile* itsTiles;
-	Tile* loadedMap;
+    Tile* itsTiles;
+    Tile* loadedMap;
 
-	bool tilesLoaded;
-	bool mapLoaded;
+    bool tilesLoaded;
+    bool mapLoaded;
 
-	SDL_Surface* clipSheet;
+    SDL_Surface* clipSheet;
 
-	void init_graphics();
-	void read_map();
-	bool is_in_view( Tile* tile );
+    void init_graphics();
+    void read_map();
+    bool is_in_view(Tile* tile);
 
 public:
-	TileManager(){}
-	~TileManager(){}
-	
-	void init( SDL_Surface* itsgraphs, int xTiles, int yTiles, int screenWidth, int screenHeigth );
-	void clean_up();
 
-	void make_random_map();
-	void load_map( std::string );
+    TileManager() {
+    }
 
-	SDL_Surface* draw_map();
-	Tile* get_finish_tile();
+    ~TileManager() {
+    }
 
-	bool check_tiles_loaded()const;
-	bool check_map_loaded()const;
+    void init(SDL_Surface* itsgraphs, int xTiles, int yTiles, int screenWidth, int screenHeigth);
+    void clean_up();
 
-	unsigned int get_map_width();
-	unsigned int get_map_height();
+    void make_random_map();
+    void load_map(std::string);
 
-	Camera camera;
+    SDL_Surface* draw_map();
+    Tile* get_finish_tile();
+
+    bool check_tiles_loaded()const;
+    bool check_map_loaded()const;
+
+    unsigned int get_map_width();
+    unsigned int get_map_height();
+
+    Camera camera;
 };
 
 #endif

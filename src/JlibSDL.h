@@ -6,11 +6,11 @@
  *
  * Betreft header voor algemene SDL functies.
  *
-*/
+ */
 
 /******************************************************************
-					Includes en globalen sectie
-******************************************************************/
+                                        Includes en globalen sectie
+ ******************************************************************/
 #ifdef __WIN32
 #include "SDL.h"
 #include "SDL_image.h"
@@ -33,10 +33,10 @@
  */
 namespace jasdlib {
 
-/**
- * Basic functions defines, basic 0x0...
- * Prefix excluded when necessary for indicating values
- */
+    /**
+     * Basic functions defines, basic 0x0...
+     * Prefix excluded when necessary for indicating values
+     */
 #define		JLIB_COLLIDE_NONE			0x00000000
 #define 	JLIB_COLLIDE_TOP 			0x00000001
 #define 	JLIB_COLLIDE_LEFT 			0x00000002
@@ -46,27 +46,27 @@ namespace jasdlib {
 #define		JLIB_COLLIDE_TOPRIGHT                   0x00000020
 #define		JLIB_COLLIDE_BOTTOMLEFT                 0x00000040
 #define		JLIB_COLLIDE_BOTTOMRIGHT                0x00000080
-/**
- * Class Timer defines, Timer 0x1...
- * Prefix excluded when necessary for indicating values
- */
+    /**
+     * Class Timer defines, Timer 0x1...
+     * Prefix excluded when necessary for indicating values
+     */
 #define		TIMER_TICKS_NONE			0x00000000
 #define		TIMER_TICKS_STARTED			0x10000001
 #define		TIMER_TICKS_PAUSED			0x10000002
 #define		TIMER_RUNNING				0x10000004
 #define		TIMER_PAUSED				0x10000008
-/**
- * Class Button defines, Button 0x2...
- * Prefix excluded when necessary for indicating values
- */
+    /**
+     * Class Button defines, Button 0x2...
+     * Prefix excluded when necessary for indicating values
+     */
 #define		BUTTON_ENABLED				0x20000001
 #define		BUTTON_CLICKED				0x20000002
 #define		BUTTON_DEFAULT_WIDTH                    0x0000012C
 #define		BUTTON_DEFAULT_HEIGHT                   0x0000003C
-/**
- * 2DObject classes defines, 2DObject 0x4...
- * Prefix excluded when necessary for indicating values
- */
+    /**
+     * 2DObject classes defines, 2DObject 0x4...
+     * Prefix excluded when necessary for indicating values
+     */
 #define		JGOBJ_IS_ACTIVE				0x40000001
 #define		JGOBJ_IS_ALIVE				0x40000002
 #define		JGOBJ_IS_DEAD				0x40000004
@@ -85,175 +85,177 @@ namespace jasdlib {
 #define		JFGOBJ_IS_RISING			0x40020000
 #define		JFGOBJ_IS_SUPPORTED			0x40040000
 
-/**
- * Internal class Timer, uses SDL millisecond calculations for precision frame counting
- */
-class Timer {
-public:
-	Timer();
-	Timer(const Timer& rhs);
-	virtual ~Timer(){}
+    /**
+     * Internal class Timer, uses SDL millisecond calculations for precision frame counting
+     */
+    class Timer {
+    public:
+        Timer();
+        Timer(const Timer& rhs);
 
-	virtual void start();
-	virtual void stop();
-	virtual void pause();
-	virtual void resume();
-	virtual void reset();
+        virtual ~Timer() {
+        }
 
-	virtual Uint32 get_ticks( Uint32 = TIMER_TICKS_NONE )const;
+        virtual void start();
+        virtual void stop();
+        virtual void pause();
+        virtual void resume();
+        virtual void reset();
 
-	virtual bool is_started()const;
-	virtual bool is_paused()const;
-protected:
-	Uint32 startTicks;
-	Uint32 pausedTicks;
+        virtual Uint32 get_ticks(Uint32 = TIMER_TICKS_NONE)const;
 
-	Uint32 i_settings;
-};
+        virtual bool is_started()const;
+        virtual bool is_paused()const;
+    protected:
+        Uint32 startTicks;
+        Uint32 pausedTicks;
 
-/**
- * Basis of all objects in the game, all to be used object must derive from these base classes.
- */
-class J2DGameObject {
-public:
-	J2DGameObject();
-	J2DGameObject(int x, int y);
-	J2DGameObject(int x, int y, int w, int h);
-	virtual ~J2DGameObject();
-	/**
-	 * Abstract function so class must be overridden.
-	 */
-	virtual void draw( SDL_Surface* screen ) = 0;
+        Uint32 i_settings;
+    };
 
-	virtual SDL_Rect* get_inner();
-	J2DGameObject* get_base();
-	unsigned int get_settings() const;
-	/**
-	 * Functions for getting info about the status of the object.
-	 */
-	bool is_active() const;
-	bool is_alive() const;
-	bool is_facing_up() const;
-	bool is_facing_down() const;
-	bool is_facing_left() const;
-	bool is_facing_right() const;
-	/**
-	 * Functions for setting the status of the object.
-	 */
-	void set_active();
-	void set_unactive();
-	void set_dead();
-	void set_inner( SDL_Rect* other );
-	void set_facing(unsigned int facing);
-	/**
-	 * Functions for setting the different internal parameters.
-	 */
-	void set_pos( int x, int y);
-	void set_size( int w, int h );
+    /**
+     * Basis of all objects in the game, all to be used object must derive from these base classes.
+     */
+    class J2DGameObject {
+    public:
+        J2DGameObject();
+        J2DGameObject(int x, int y);
+        J2DGameObject(int x, int y, int w, int h);
+        virtual ~J2DGameObject();
+        /**
+         * Abstract function so class must be overridden.
+         */
+        virtual void draw(SDL_Surface* screen) = 0;
 
-protected:
-	Uint16 x_pos, y_pos;
-	Uint16 width, height;
-	SDL_Rect* inner;
+        virtual SDL_Rect* get_inner();
+        J2DGameObject* get_base();
+        unsigned int get_settings() const;
+        /**
+         * Functions for getting info about the status of the object.
+         */
+        bool is_active() const;
+        bool is_alive() const;
+        bool is_facing_up() const;
+        bool is_facing_down() const;
+        bool is_facing_left() const;
+        bool is_facing_right() const;
+        /**
+         * Functions for setting the status of the object.
+         */
+        void set_active();
+        void set_unactive();
+        void set_dead();
+        void set_inner(SDL_Rect* other);
+        void set_facing(unsigned int facing);
+        /**
+         * Functions for setting the different internal parameters.
+         */
+        void set_pos(int x, int y);
+        void set_size(int w, int h);
 
-	Uint32 i_settings;
+    protected:
+        Uint16 x_pos, y_pos;
+        Uint16 width, height;
+        SDL_Rect* inner;
 
-	void updateInner();
-};
+        Uint32 i_settings;
 
-/**
- * J2DMovGameObject
- */
-class J2DMovGameObject : public J2DGameObject {
-public:
-	J2DMovGameObject();
-	J2DMovGameObject(int x, int y );
-	J2DMovGameObject(int x, int y, int w, int h );
-	J2DMovGameObject(int x, int y, int w, int h, float xs, float ys);
-	virtual ~J2DMovGameObject();
+        void updateInner();
+    };
 
-	virtual void update();
+    /**
+     * J2DMovGameObject
+     */
+    class J2DMovGameObject : public J2DGameObject {
+    public:
+        J2DMovGameObject();
+        J2DMovGameObject(int x, int y);
+        J2DMovGameObject(int x, int y, int w, int h);
+        J2DMovGameObject(int x, int y, int w, int h, float xs, float ys);
+        virtual ~J2DMovGameObject();
 
-	float get_xspeed() const;
-	float get_yspeed() const;
+        virtual void update();
 
-	bool is_moving() const;
-	void start_moving();
-	void stop_moving();
+        float get_xspeed() const;
+        float get_yspeed() const;
 
-protected:
-	float x_speed, y_speed;
-};
+        bool is_moving() const;
+        void start_moving();
+        void stop_moving();
 
-/**
- * J2DPhysicalGameObject
- */
-class J2DPhysicalGameObject : public J2DMovGameObject {
-public:
-	J2DPhysicalGameObject();
-	J2DPhysicalGameObject(int x, int y );
-	J2DPhysicalGameObject(int x, int y, int w, int h );
-	J2DPhysicalGameObject(int x, int y, int w, int h, float we );
-	virtual ~J2DPhysicalGameObject();
+    protected:
+        float x_speed, y_speed;
+    };
 
-	float get_weight() const;
-	void set_weight(float w);
+    /**
+     * J2DPhysicalGameObject
+     */
+    class J2DPhysicalGameObject : public J2DMovGameObject {
+    public:
+        J2DPhysicalGameObject();
+        J2DPhysicalGameObject(int x, int y);
+        J2DPhysicalGameObject(int x, int y, int w, int h);
+        J2DPhysicalGameObject(int x, int y, int w, int h, float we);
+        virtual ~J2DPhysicalGameObject();
 
-	/**
-	 * Overloading the update function for physics.
-	 */
-	virtual void update();
-	/**
-	 * Check if this object is supported by another object.
-	 */
-	bool check_supported_by_object(J2DGameObject* target);
-	/**
-	 *
-	 */
-	void start_falling();
-	void stop_falling();
-	void start_jump();
-	void stop_jump();
+        float get_weight() const;
+        void set_weight(float w);
 
-protected:
-	float weight;
-};
+        /**
+         * Overloading the update function for physics.
+         */
+        virtual void update();
+        /**
+         * Check if this object is supported by another object.
+         */
+        bool check_supported_by_object(J2DGameObject* target);
+        /**
+         *
+         */
+        void start_falling();
+        void stop_falling();
+        void start_jump();
+        void stop_jump();
 
-class Button : public J2DGameObject {
-public:
-	Button( std::string text, TTF_Font* font, int x_pos = 0, int y_pos = 0, Uint32 flags = 0 );
-	~Button();
+    protected:
+        float weight;
+    };
 
-	bool handle_events( SDL_Event* event );
-	void draw( SDL_Surface* surface );
+    class Button : public J2DGameObject {
+    public:
+        Button(std::string text, TTF_Font* font, int x_pos = 0, int y_pos = 0, Uint32 flags = 0);
+        ~Button();
 
-	bool enabled() const;
-	void enabled( bool flag );
+        bool handle_events(SDL_Event* event);
+        void draw(SDL_Surface* surface);
 
-	std::string get_caption() const;
-	void set_caption( std::string cap, TTF_Font* font );
+        bool enabled() const;
+        void enabled(bool flag);
 
-	int get_x() const;
-	int get_y() const;
+        std::string get_caption() const;
+        void set_caption(std::string cap, TTF_Font* font);
 
-protected:
-	SDL_Surface* visual;
-	Mix_Chunk* click_sound;
-	std::string caption;
-};
+        int get_x() const;
+        int get_y() const;
 
-/**
- * General functions
- */
+    protected:
+        SDL_Surface* visual;
+        Mix_Chunk* click_sound;
+        std::string caption;
+    };
 
-SDL_Surface* load_image_from_file( const char* fileName );
+    /**
+     * General functions
+     */
 
-double distance( int x1, int y1, int x2, int y2 ) ;
+    SDL_Surface* load_image_from_file(const char* fileName);
 
-bool is_collision( SDL_Rect& rect1, SDL_Rect& rect2 );
-bool is_collision( SDL_Rect& rect1, SDL_Rect& rect2, int side );
+    double distance(int x1, int y1, int x2, int y2);
 
-bool in_range( int x_c, int y_c, SDL_Rect& rect );
+    bool is_collision(SDL_Rect& rect1, SDL_Rect& rect2);
+    bool is_collision(SDL_Rect& rect1, SDL_Rect& rect2, int side);
+
+    bool in_range(int x_c, int y_c, SDL_Rect& rect);
 
 } // End name space jasdlib
 
