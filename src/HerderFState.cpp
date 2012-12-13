@@ -73,7 +73,7 @@ void HFinishState::clean_up() {
 void HFinishState::read_score_from_file() {
     std::ifstream fIn("obj/f_game.txt");
     if (fIn != NULL) {
-        int value;
+        int value; 
         fIn >> value;
         finished = value;
         fIn >> value;

@@ -439,7 +439,6 @@ public:
     // Scan de omgeving naar een belangrijker schaap dan deze
     SDL_Rect find_leader(Sheep* sheep);
 
-
     Timer itsTimer;
 
 };

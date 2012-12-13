@@ -51,39 +51,39 @@ namespace jasdlib {
      * Prefix excluded when necessary for indicating values
      */
 #define		TIMER_TICKS_NONE			0x00000000
-#define		TIMER_TICKS_STARTED			0x10000001
-#define		TIMER_TICKS_PAUSED			0x10000002
-#define		TIMER_RUNNING				0x10000004
-#define		TIMER_PAUSED				0x10000008
+#define		TIMER_TICKS_STARTED			0x00000001
+#define		TIMER_TICKS_PAUSED			0x00000002
+#define		TIMER_RUNNING				0x00000004
+#define		TIMER_PAUSED				0x00000008
     /**
      * Class Button defines, Button 0x2...
      * Prefix excluded when necessary for indicating values
      */
-#define		BUTTON_ENABLED				0x20000001
-#define		BUTTON_CLICKED				0x20000002
+#define		BUTTON_ENABLED				0x00000001
+#define		BUTTON_CLICKED				0x00000002
 #define		BUTTON_DEFAULT_WIDTH                    0x0000012C
 #define		BUTTON_DEFAULT_HEIGHT                   0x0000003C
     /**
      * 2DObject classes defines, 2DObject 0x4...
      * Prefix excluded when necessary for indicating values
      */
-#define		JGOBJ_IS_ACTIVE				0x40000001
-#define		JGOBJ_IS_ALIVE				0x40000002
-#define		JGOBJ_IS_DEAD				0x40000004
-#define		JGOBJ_IS_FACING_LEFT                    0x40000008
-#define		JGOBJ_IS_FACING_RIGHT                   0x40000010
-#define		JGOBJ_IS_FACING_UP			0x40000020
-#define		JGOBJ_IS_FACING_DOWN                    0x40000040
+#define		JGOBJ_IS_ACTIVE				0x00000001
+#define		JGOBJ_IS_ALIVE				0x00000002
+#define		JGOBJ_IS_DEAD				0x00000004
+#define		JGOBJ_IS_FACING_LEFT                    0x00000008
+#define		JGOBJ_IS_FACING_RIGHT                   0x00000010
+#define		JGOBJ_IS_FACING_UP			0x00000020
+#define		JGOBJ_IS_FACING_DOWN                    0x00000040
 
-#define		JMGOBJ_IS_MOVING			0x40000100
-#define		JMGOBJ_MOVING_UP			0x40000200
-#define		JMGOBJ_MOVING_DOWN			0x40000400
-#define		JMGOBJ_MOVING_LEFT			0x40000800
-#define		JMGOBJ_MOVING_RIGHT			0x40001000
+#define		JMGOBJ_IS_MOVING			0x00000100
+#define		JMGOBJ_MOVING_UP			0x00000200
+#define		JMGOBJ_MOVING_DOWN			0x00000400
+#define		JMGOBJ_MOVING_LEFT			0x00000800
+#define		JMGOBJ_MOVING_RIGHT			0x00001000
 
-#define		JFGOBJ_IS_FALLING			0x40010000
-#define		JFGOBJ_IS_RISING			0x40020000
-#define		JFGOBJ_IS_SUPPORTED			0x40040000
+#define		JFGOBJ_IS_FALLING			0x00010000
+#define		JFGOBJ_IS_RISING			0x00020000
+#define		JFGOBJ_IS_SUPPORTED			0x00040000
 
     /**
      * Internal class Timer, uses SDL millisecond calculations for precision frame counting

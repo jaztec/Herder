@@ -217,9 +217,12 @@ void HPlayState::write_score_to_file(SheepManager* finishedHerd) {
     else
         fOut << 0 << " ";
 
-    fOut << finishedHerd->get_score();
+    unsigned int _score = finishedHerd->get_score();
+    Uint32 _ticks = finishedHerd->itsTimer.get_ticks(); 
+    
+    fOut << _score;
     fOut << " ";
-    fOut << finishedHerd->itsTimer.get_ticks();
+    fOut << _ticks;
     fOut << "\n";
 
     fOut.close();
