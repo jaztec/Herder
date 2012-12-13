@@ -25,6 +25,7 @@ class JGameState;
 
 class JEngine {
 private:
+    
     std::vector<JGameState*> gameStates;
 
     unsigned int i_settings;
@@ -36,6 +37,7 @@ private:
 public:
     SDL_Surface* screen;
 
+    /** Initieer de engine en start deze */
     void init(const char* title, int width = 640, int height = 480, int bpp = 0, unsigned int flags = 0);
     void clean_up();
 
@@ -50,18 +52,36 @@ public:
 
     void toggle_fullscreen();
 
+    /**
+     * Verkrijg het aantal geladen gamestates.
+     * 
+     * @return unsigned int
+     */
     unsigned int get_state_count() const {
         return gameStates.size();
     }
 
+    /**
+     * Controleer of de engine draait.
+     * 
+     * @return bool 
+     */
     bool check_running() {
         return ((i_settings & ISRUNNING) == ISRUNNING);
     }
 
+    /**
+     * Controleer of er fullscreen weergave is.
+     * 
+     * @return bool
+     */
     bool is_fullscreen() {
         return ((i_settings & ISFULLSCREEN) == ISFULLSCREEN);
     }
 
+    /**
+     * Stop de engine.
+     */
     void exit() {
         i_settings &= ~ISRUNNING;
     }

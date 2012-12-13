@@ -3,9 +3,18 @@
 #include "JEngine.h"
 #include "JGameState.h"
 
-void JEngine::init(const char* title, int width, int height, int bpp, unsigned int flags) {
+/**
+ * Initieer de engine en start deze
+ * 
+ * @param char* title
+ * @param int width
+ * @param int height
+ * @param int bpp
+ * @param Uint32 flags
+ */
+void JEngine::init(const char* title, int width, int height, int bpp, Uint32 flags) {
     PRINT("JEngine::init");
-    unsigned int flag;
+    Uint32 flag;
 
     i_settings = flags;
 
@@ -35,6 +44,9 @@ void JEngine::init(const char* title, int width, int height, int bpp, unsigned i
 
 }
 
+/**
+ * SDL sluiten en geladen gamestates opruimen.
+ */
 void JEngine::clean_up() {
     PRINT("JEngine::clean_up");
     // Zorg ervoor dat SDL verkleind voor afsluiten zodat andere programmaś veilig zijn wanneer er iets fout gaat
@@ -47,7 +59,6 @@ void JEngine::clean_up() {
         gameStates.pop_back();
     }
 
-
     // Sluit SDL
     Mix_CloseAudio();
     TTF_Quit();
@@ -56,6 +67,11 @@ void JEngine::clean_up() {
     printf("Game engine terminated\n");
 }
 
+/**
+ * Vervang de huidig geladen gamestate of zet een nieuwe in.
+ * 
+ * @param JGameState* gameState De nieuwe gamestate
+ */
 void JEngine::change_state(JGameState* gameState) {
     PRINT("JEngine::change_state");
     // Als er een gamestate draait sluit deze dan netjes af
@@ -70,6 +86,11 @@ void JEngine::change_state(JGameState* gameState) {
 
 }
 
+/**
+ * Pauzeer de huidig geladen gamestate en start een nieuwe
+ * 
+ * @param gameState De in te laden gamestate
+ */
 void JEngine::push_state(JGameState* gameState) {
     PRINT("JEngine::push_state");
     // Als er een gamestate draait pauzeer die dan
@@ -83,6 +104,10 @@ void JEngine::push_state(JGameState* gameState) {
 
 }
 
+/**
+ * Ruim de huisig geladen gamestate op. Als er een gamestate gepauzeerd is
+ * hervat deze dan.
+ */
 void JEngine::pop_state() {
     PRINT("JEngine::pop_state");
     // Als er een gamestate draait sluit deze dan netjes af
@@ -98,26 +123,41 @@ void JEngine::pop_state() {
 
 }
 
+/**
+ * Behandel events in de huidig geladen gamestate
+ */
 void JEngine::handle_events() {
     if (!gameStates.empty())
         gameStates.back()->handle_events(this);
 }
 
+/**
+ * Maak de nieuwe berekeningen in de huidig geladen gamestate
+ */
 void JEngine::do_think() {
     if (!gameStates.empty())
         gameStates.back()->do_think(this);
 }
 
+/**
+ * Update de huidig geladen gamestate
+ */
 void JEngine::update() {
     if (!gameStates.empty())
         gameStates.back()->update(this);
 }
 
+/**
+ * Toon de huidig geladen gamestate
+ */
 void JEngine::show() {
     if (!gameStates.empty())
         gameStates.back()->show(this);
 }
 
+/**
+ * Zet de geladen game in fullscreen of haal deze er vanaf.
+ */
 void JEngine::toggle_fullscreen() {
     unsigned int flag = 0x00000000;
 

@@ -8,30 +8,29 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    JEngine game;
 
+    // Engine aanzwengelen.
+    JEngine game;
     game.init("Herder game", 800, 640, 32, 0);
 
     try {
+        // Startmenu initieren
         game.change_state(HMainState::instance());
-    } catch (ERR::Out_Of_Memory()) {
-        printf("Mem Error received\n");
+
+        // Main loop.
+        while (game.check_running()) {
+            game.handle_events();
+            game.do_think();
+            game.update();
+            game.show();
+        }
+    } catch( ... ) {
+        // Er is iets naar de tering gegaan, error teruggeven.
         game.clean_up();
-        return 1;
-    } catch (...) {
-        printf("Undefined Error received\n");
-        game.clean_up();
-        return 1;
+        return -1;
     }
 
-    while (game.check_running()) {
-        game.handle_events();
-        game.do_think();
-        game.update();
-        game.show();
-    }
-
+    // Opruimen en geen error teruggeven
     game.clean_up();
-
     return 0;
 }
