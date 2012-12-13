@@ -45,9 +45,6 @@ OBJS_Herder =  \
 	$(TARGETDIR_Herder)/JlibSDL.o \
 	$(TARGETDIR_Herder)/JlibHerder.o
 SYSLIBS_Herder = -ldl 
-#USERLIBS_Herder = -lSDL_mixer -lSDL_ttf -lSDL_image -lSDL $(SYSLIBS_Herder) 
-#USERLIBS_Herder = libSDL_mixer.a libSDL_ttf.a libSDL_image.a libSDL.a $(SYSLIBS_Herder) 
-#USERLIBS_Herder = -Wl,Bstatic -lSDL_image `sdl-config --libs` -lpng12 -lz -ltiff -ljpeg -lasound -laudio -lesd -Wl,-Bdynamic `directfb-config --libs` -lpulse-simple -lcaca -laa -ldl $(SYSLIBS_Herder) 
 USERLIBS_Herder = -Wl -Bstatic -lSDL_mixer -lSDL_ttf -lSDL_image -lSDL `sdl-config --libs` $(SYSLIBS_Herder) 
 DEPLIBS_Herder =      
 LDLIBS_Herder = $(USERLIBS_Herder)
