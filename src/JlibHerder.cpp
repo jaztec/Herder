@@ -1191,31 +1191,52 @@ void SheepManager::do_think() {
 
 
 // invoer parameters waarden:
-//							0 - Totaal aantal schapen beheerd door de SheepManager
-//							1 - Totaal aantal schapen welke nog in het spel zijn
-//							2 - Totaal aantal gefinishte schapen
+//							0 - 
+//							1 - 
+//							2 - 
 
+/**
+ * Verkrijg het aantal shoarmarollen in de game
+ * 
+ * @param flag integer
+ * @return 
+ */
 int SheepManager::get_sheep_count(int flag)const {
-    if (!flag)
-        return qtySheep;
-    else if (flag == 1) {
-        int count = 0;
-        for (int i = 0; i < qtySheep; i++)
-            if (!(itsSheep[ i ].is_finished()))
-                count++;
-        return count;
-    } else if (flag == 2) {
-        int count = 0;
-        for (int j = 0; j < qtySheep; j++)
-            if (itsSheep[ j ].is_finished())
-                count++;
-        return count;
-    } else
-        return 0;
+    
+    switch (flag) {
+
+        // Totaal aantal schapen beheerd door de SheepManager
+        case 0:
+            return qtySheep;
+            break;
+
+        // Totaal aantal schapen welke nog in het spel zijn
+        case 1:
+            int count = 0;
+            for (int i = 0; i < qtySheep; i++) {
+                if (!(itsSheep[ i ].is_finished())) {
+                    count++;
+                }
+            }
+            return count;
+            break;
+     
+        // Totaal aantal gefinishte schapen
+        case 2:
+            int count = 0;
+            for (int j = 0; j < qtySheep; j++) {
+                if (itsSheep[ j ].is_finished()) {
+                    count++;
+                }
+            }
+            return count;
+            break;
+    }
+    
+    return 0;
 }
 
 // Deze functie scant de omgeving naar een belangrijker schaap
-
 SDL_Rect SheepManager::find_leader(Sheep* sheep) {
     unsigned int max_distance = LEADER_DISTANCE;
 
