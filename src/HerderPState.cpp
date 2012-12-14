@@ -137,8 +137,9 @@ void HPlayState::resume() {
     herd->itsTimer.resume();
     if (isFinished) {
         restart();
-    } else
+    } else {
         character->reset();
+    }
 }
 
 void HPlayState::restart() {
