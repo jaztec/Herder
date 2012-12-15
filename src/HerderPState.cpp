@@ -25,7 +25,7 @@ void HPlayState::init(JEngine* game) {
     PRINT("HPlayState::init");
     font = TTF_OpenFont("obj/sans.ttf", 45);
     if (font == NULL) {
-        printf("Thowing error from HPlayState::init after loading font\n");
+        printf("Throwing error from HPlayState::init after loading font\n");
         throw ( ERR::Out_Of_Memory());
     }
 
@@ -44,18 +44,18 @@ void HPlayState::init(JEngine* game) {
     snd_Misc01 = Mix_LoadWAV("sfx/misc140.wav");
 
     if ((charClips == NULL) || (dogClips == NULL) || (sheepClips == NULL) || (mapClips == NULL)) {
-        printf("Thowing error from HPlayState::init after loading clips\n");
+        printf("Throwing error from HPlayState::init after loading clips\n");
         throw ( ERR::Out_Of_Memory());
     }
 
     if ((snd_Dog01 == NULL) || (snd_Dog02 == NULL) || (snd_Sheep01 == NULL) || (snd_Sheep02 == NULL) || (snd_Misc01 == NULL)) {
-        printf("Thowing error from HPlayState::init after loading sound effects\n");
+        printf("Throwing error from HPlayState::init after loading sound effects\n");
         throw ( ERR::Out_Of_Memory());
     }
 
     map = new TileManager();
     if (map == NULL) {
-        printf("Thowing error from HPlayState::init after loading TileManager\n");
+        printf("Throwing error from HPlayState::init after loading TileManager\n");
         throw ( ERR::Out_Of_Memory());
     }
 
@@ -81,7 +81,7 @@ void HPlayState::init(JEngine* game) {
     isFinished = false;
 
     if ((character == NULL) || (dog == NULL) || (herd == NULL)) {
-        printf("Thowing error from HPlayState::init after loading game objects\n");
+        printf("Throwing error from HPlayState::init after loading game objects\n");
         throw ( ERR::Out_Of_Memory());
     }
 
@@ -137,8 +137,9 @@ void HPlayState::resume() {
     herd->itsTimer.resume();
     if (isFinished) {
         restart();
-    } else
+    } else {
         character->reset();
+    }
 }
 
 void HPlayState::restart() {
