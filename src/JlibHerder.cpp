@@ -1202,6 +1202,7 @@ void SheepManager::do_think() {
  * @return 
  */
 int SheepManager::get_sheep_count(int flag)const {
+    int count = 0;
     
     switch (flag) {
 
@@ -1212,7 +1213,6 @@ int SheepManager::get_sheep_count(int flag)const {
 
         // Totaal aantal schapen welke nog in het spel zijn
         case 1:
-            int count = 0;
             for (int i = 0; i < qtySheep; i++) {
                 if (!(itsSheep[ i ].is_finished())) {
                     count++;
@@ -1223,7 +1223,6 @@ int SheepManager::get_sheep_count(int flag)const {
      
         // Totaal aantal gefinishte schapen
         case 2:
-            int count = 0;
             for (int j = 0; j < qtySheep; j++) {
                 if (itsSheep[ j ].is_finished()) {
                     count++;
